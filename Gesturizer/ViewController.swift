@@ -15,56 +15,62 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        singleTapRecognizer.requireGestureRecognizerToFail(doubleTapRecognizer)
+        
+        
+        
+        singleTapRecognizer.require(toFail: doubleTapRecognizer)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    override func canBecomeFirstResponder() -> Bool {
-        return true
-    }
     
-    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
-        if motion == .MotionShake {
-            showGestureName("Shake")
+    
+
+//    override func canBecomeFirstResponder() -> Bool {
+//        return true
+//    }
+    
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            showGestureName(name: "Shake")
         }
     }
     
+    
     @IBAction func singleTap(sender: UITapGestureRecognizer) {
-        showGestureName("Tap")
+        showGestureName(name: "Tap")
     }
     
     @IBAction func doubleTap(sender: UITapGestureRecognizer) {
-        showGestureName("Double Tap")
+        showGestureName(name: "Double Tap")
     }
     
     func showGestureName(name: String) {
         gestureName.text = name
-        UIView.animateWithDuration(1.0,
+        UIView.animate(withDuration: 1.0,
             animations: { self.gestureName.alpha = 1.0 },
             completion: { _ in
-                UIView.animateWithDuration(1.0) { self.gestureName.alpha = 0 }
+                UIView.animate(withDuration: 1.0) { self.gestureName.alpha = 0 }
         })
     }
     
     @IBAction func pinch(sender: UIPinchGestureRecognizer) {
-        if sender.state == .Ended {
-            showGestureName("Pinch")
+        if sender.state == .ended {
+            showGestureName(name: "Pinch")
         }
     }
     
     @IBAction func rotation(sender: UIRotationGestureRecognizer) {
-        if sender.state == .Ended {
-            showGestureName("Rotation")
+        if sender.state == .ended {
+            showGestureName(name: "Rotation")
         }
     }
     
     @IBAction func swipe(sender: UISwipeGestureRecognizer) {
-        if sender.direction == .Right {
-            showGestureName("Right Swipe")
+        if sender.direction == .right {
+            showGestureName(name: "Right Swipe")
         }
     }
     
